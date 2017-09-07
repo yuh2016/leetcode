@@ -19,4 +19,24 @@ public class SolutionTest extends TestCase {
 		double result2 = t.findMedianSortedArrays(nums3, nums4);
 		assertEquals(result2, 2.5);
 	}
+	
+	@Test
+	public void testLongestPalindrome(){
+		String s1 = "babad";
+		String result1 = t.longestPalindrome(s1);
+		assertTrue("aba".equals(result1) || "bab".equals(result1));
+		
+		String s2 = "cbbd";
+		String result2 = t.longestPalindrome(s2);
+		assertEquals("bb", result2);
+		
+		String s3 = "d";
+		String result3 = t.longestPalindrome(s3);
+		assertEquals("d", result3);
+		
+		String s4 = "rgczcpratwyqxaszbuwwcadruayhasynuxnakpmsyhxzlnxmdtsqqlmwnbxvmgvllafrpmlfuqpbhjddmhmbcgmlyeypkfpreddyencsdmgxysctpubvgeedhurvizgqxclhpfrvxggrowaynrtuwvvvwnqlowdihtrdzjffrgoeqivnprdnpvfjuhycpfydjcpfcnkpyujljiesmuxhtizzvwhvpqylvcirwqsmpptyhcqybstsfgjadicwzycswwmpluvzqdvnhkcofptqrzgjqtbvbdxylrylinspncrkxclykccbwridpqckstxdjawvziucrswpsfmisqiozworibeycuarcidbljslwbalcemgymnsxfziattdylrulwrybzztoxhevsdnvvljfzzrgcmagshucoalfiuapgzpqgjjgqsmcvtdsvehewrvtkeqwgmatqdpwlayjcxcavjmgpdyklrjcqvxjqbjucfubgmgpkfdxznkhcejscymuildfnuxwmuklntnyycdcscioimenaeohgpbcpogyifcsatfxeslstkjclauqmywacizyapxlgtcchlxkvygzeucwalhvhbwkvbceqajstxzzppcxoanhyfkgwaelsfdeeviqogjpresnoacegfeejyychabkhszcokdxpaqrprwfdahjqkfptwpeykgumyemgkccynxuvbdpjlrbgqtcqulxodurugofuwzudnhgxdrbbxtrvdnlodyhsifvyspejenpdckevzqrexplpcqtwtxlimfrsjumiygqeemhihcxyngsemcolrnlyhqlbqbcestadoxtrdvcgucntjnfavylip";
+		String result4 = t.longestPalindrome(s4);
+		assertEquals("qgjjgq", result4);
+		
+	}
 }
