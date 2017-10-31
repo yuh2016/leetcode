@@ -1,10 +1,13 @@
 package com.leetcode.yh;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Solution {
-	// 004
+	// 004 Median of Two Sorted Arrays
 	public double findMedianSortedArrays(int[] nums1, int[] nums2) {
 		ArrayList<Integer> list = new ArrayList<>();
 		for (int i = 0; i < nums1.length; i++) {
@@ -25,7 +28,7 @@ public class Solution {
 		}
 	}
 
-	// 005
+	// 005 Longest Palindromic Substring //TIME OUT TODO
 	public String longestPalindrome(String s){
 		String maxStr = null;
 		int maxLen = 0;
@@ -50,4 +53,20 @@ public class Solution {
 		}
 		return true;
 	}
+	
+	//006 ZigZag Conversion  TODO
+	public String convert(String s, int numRows) {
+		int inx = numRows + numRows - 2;
+		char[] array = s.toCharArray();
+		
+		List<Character> list = new ArrayList<>();
+		for(int i = 0; i < array.length; i += inx){
+			for(int j = 0; j < inx && (inx * i + j) < s.length(); j++){
+				list.add(array[inx * i + j]);
+			}
+		}
+		Character[] obj = new Character[s.length()];
+		list.toArray(obj);
+		return Arrays.toString(obj);
+    }
 }
