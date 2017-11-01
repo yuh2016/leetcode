@@ -61,8 +61,9 @@ public class Solution {
 		
 		List<Character> list = new ArrayList<>();
 		for(int i = 0; i < array.length; i += inx){
-			for(int j = 0; j < inx && (inx * i + j) < s.length(); j++){
+			for(int j = 0; j < numRows; j++){
 				list.add(array[inx * i + j]);
+				list.add(array[inx * (i + 1) - j]);
 			}
 		}
 		Character[] obj = new Character[s.length()];
