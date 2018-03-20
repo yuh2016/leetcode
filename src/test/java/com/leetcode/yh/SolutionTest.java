@@ -44,4 +44,25 @@ public class SolutionTest extends TestCase {
 		String result1 = t.convert("PAYPALISHIRING", 3);
 		assertEquals(result1, "PAHNAPLSIIGYIR");
 	}
+	
+	@Test
+	public void testReverseInteger(){
+//		int result1 = t.reverseInteger(2345);
+//		assertEquals(result1, 5432);
+//		
+//		int result2 = t.reverseInteger(57611);
+//		assertEquals(result2, 11675);
+//		
+//		int result3 = t.reverseInteger(0);
+//		assertEquals(result3, 0);
+//		
+//		int result4 = t.reverseInteger(120);
+//		assertEquals(result4, 21);
+//		
+//		int result5 = t.reverseInteger(1534236469);
+//		assertEquals(result5, 0);
+		
+		int result6 = t.reverseInteger(-132);
+		assertEquals(result6, -231);
+	}
 }
