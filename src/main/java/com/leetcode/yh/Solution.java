@@ -77,7 +77,7 @@ public class Solution {
 			for (int j = 0; j < numRows; j++) {
 				char a = array[inx * i + j];
 				list.add(a);
-				char b = array[inx * (i + 1) - j];
+				char b = array[inx * i + numRows - j];
 				if (a != b && j > 0) {
 					list.add(array[inx * (i + 1) - j]);
 				}
@@ -108,4 +108,26 @@ public class Solution {
 		}
 		return Long.valueOf(result).intValue();
 	}
+	
+	//008. String to Integer (atoi)
+	public int myAtoi(String str) {
+        
+		return 0;
+    }
+	
+	//009. Palindrome Number
+	public boolean isPalindrome(int x) {
+		if (x < 0) {
+			return false;
+		}
+		
+        int reverse = 0, tmp = 0, origial = x;
+		while(x != 0){
+			tmp = x % 10;
+			x = x / 10;
+			reverse = reverse * 10 + tmp;
+		}
+		System.out.println(reverse);
+		return reverse == origial;
+    }
 }

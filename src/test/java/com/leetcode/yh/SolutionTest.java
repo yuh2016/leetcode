@@ -65,4 +65,19 @@ public class SolutionTest extends TestCase {
 		int result6 = t.reverseInteger(-132);
 		assertEquals(result6, -231);
 	}
+	
+	@Test
+	public void testIsPalindrome(){
+		boolean result1 = t.isPalindrome(2345432);
+		assertEquals(result1, true);
+		
+		boolean result2 = t.isPalindrome(12343);
+		assertEquals(result2, false);
+		
+		boolean result3 = t.isPalindrome(-1234321);
+		assertEquals(result3, false);
+		
+		boolean result4 = t.isPalindrome(-2147447412);
+		assertEquals(result4, false);
+	}
 }
