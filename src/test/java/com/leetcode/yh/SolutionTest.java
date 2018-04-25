@@ -80,4 +80,28 @@ public class SolutionTest extends TestCase {
 		boolean result4 = t.isPalindrome(-2147447412);
 		assertEquals(result4, false);
 	}
+	
+	@Test
+	public void testMyAtoi(){
+		int result1 = t.myAtoi(" +567uj ");
+		assertEquals(result1, 567);
+		
+		int result2 = t.myAtoi(" -567uj ");
+		assertEquals(result2, -567);
+		
+		int result3 = t.myAtoi("  567+-uj ");
+		assertEquals(result3, 567);
+		
+		int result4 = t.myAtoi("  +87654321243456688uj ");
+		assertEquals(result4, Integer.MAX_VALUE);
+		
+		int result5 = t.myAtoi("juyh +uj ");
+		assertEquals(result5, 0);
+		
+		int result6 = t.myAtoi("9223372036854775809");
+		assertEquals(result6, Integer.MAX_VALUE);
+		
+		int result7 = t.myAtoi("-9223372036854775809");
+		assertEquals(result7, Integer.MIN_VALUE);
+	}
 }

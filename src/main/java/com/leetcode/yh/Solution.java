@@ -1,5 +1,6 @@
 package com.leetcode.yh;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -30,14 +31,20 @@ public class Solution {
 	// 005 Longest Palindromic Substring //TIME OUT TODO
 	public String longestPalindrome(String s) {
 		String maxStr = null;
-		/*
-		 * int maxLen = 0; for (int i = 0; i < s.length(); i++) { for (int j = i
-		 * + 1; j <= s.length(); j++) { String str = s.substring(i, j); if
-		 * (isPalindrome(str) && str.length() > maxLen) { maxStr = str; maxLen =
-		 * str.length(); } } }
-		 */
 
-		if (s.length() == 1) {
+		int maxLen = 0;
+		for (int i = 0; i < s.length(); i++) {
+			for (int j = i + 1; j <= s.length(); j++) {
+				String str = s.substring(i, j);
+				if (isPalindrome(str) && str.length() > maxLen) {
+					maxStr = str;
+					maxLen = str.length();
+				}
+			}
+		}
+		 
+
+		/*if (s.length() == 1) {
 			return s;
 		}
 		for (int i = 0; i < s.length(); i++) {
@@ -52,7 +59,7 @@ public class Solution {
 
 				}
 			}
-		}
+		}*/
 
 		return maxStr;
 	}
@@ -111,7 +118,53 @@ public class Solution {
 	
 	//008. String to Integer (atoi)
 	public int myAtoi(String str) {
+        String tmp = str.trim();
+        if(tmp.length() == 0){
+        	return 0;
+        }
         
+        char first = tmp.charAt(0);
+        if(first == '+' || first == '-' || (first >= '0' && first <= '9')){
+        	
+        }else{
+        	return 0;
+        }
+        
+        char[] chars = tmp.toCharArray();
+        int start = 0, end = -1, index = 0;
+        while(index < tmp.length()){
+        	char c = chars[index];
+        	if(index == 0){
+        		if(c == '+' || c == '-' || (c >= '0' && c <= '9')){
+        			index ++;
+        			end = 0;
+	        	}else{
+	        		break;
+	        	}
+        	}else{
+        		if(c >= '0' && c <= '9'){
+        			end++;
+        			index ++;
+        			continue;
+        		}else{
+        			break;
+        		}
+        	}
+        }
+        if(start >= 0){
+        	String num = tmp.substring(start, end + 1);
+        	if(num.length() == 1 && (num.startsWith("+") || num.startsWith("-"))){
+        		return 0;
+        	}
+        	BigInteger n = new BigInteger(num);
+        	if(n.compareTo(new BigInteger(String.valueOf(Integer.MAX_VALUE))) == 1){
+        		return Integer.MAX_VALUE;
+        	}
+        	if(n.compareTo(new BigInteger(String.valueOf(Integer.MIN_VALUE))) == -1){
+        		return Integer.MIN_VALUE;
+        	}
+        	return n.intValue();
+        }
 		return 0;
     }
 	
@@ -127,7 +180,6 @@ public class Solution {
 			x = x / 10;
 			reverse = reverse * 10 + tmp;
 		}
-		System.out.println(reverse);
 		return reverse == origial;
     }
 }
