@@ -182,4 +182,53 @@ public class Solution {
 		}
 		return reverse == origial;
     }
+	
+	/**
+	 * //10. Regular Expression Matching
+	 * @param s string
+	 * @param p pattern
+	 * @return
+	 */
+	public boolean isMatch(String s, String p) {
+        //.表示任意字符，*表示0次或多次
+		String stmp = null;
+		String ptmp = null;
+		for(int i = 0; i < p.length(); i++){
+			stmp = s.substring(i, i+1);
+			ptmp = p.substring(i, i+1);
+			if(stmp.equals(ptmp) || stmp.equals(".")){
+				continue;
+			}else{
+				
+			}
+		}
+		return false;
+    }
+	
+	/**
+	 * 11. Container With Most Water
+	 * @param height
+	 * @return
+	 */
+	public int maxArea(int[] height) {
+		int max = 0;
+		int tmp = 0;
+		for(int i=0; i<height.length - 1; i++){
+			for(int j = i + 1; j < height.length; j++){
+				tmp = (j - i) * min(height[i], height[j]);
+				if(tmp > max){
+					max = tmp;
+				}
+			}
+		}
+        return max;
+    }
+	
+	private int min(int a, int b){
+		if(a < b){
+			return a;
+		}else{
+			return b;
+		}
+	}
 }
