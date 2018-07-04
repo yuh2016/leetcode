@@ -104,4 +104,50 @@ public class SolutionTest extends TestCase {
 		int result7 = t.myAtoi("-9223372036854775809");
 		assertEquals(result7, Integer.MIN_VALUE);
 	}
+	
+	@Test
+	public void testMaxArea(){
+		int[] height1 = {2,1,3,5};
+		int maxArea1 = t.maxArea(height1);
+		assertEquals(maxArea1, 6);
+		
+		int[] height2 = {1,2,4,3};
+		int maxArea2 = t.maxArea(height2);
+		assertEquals(maxArea2, 4);
+	}
+	
+	@Test
+	public void testMaxArea2(){
+		int[] height = new int[15000];
+		for(int i = 15000; i > 0; i--){
+			height[15000 - i] = i;
+		}
+		int maxArea = t.maxArea(height);
+		System.out.println(maxArea);
+//		assertEquals(maxArea, 4);
+	}
+	
+	@Test
+	public void testIntToRoman(){
+		int num = 3;
+		String result = t.intToRoman(num);
+		assertEquals(result, "III");
+		
+		int num1 = 4;
+		String result1 = t.intToRoman(num1);
+		assertEquals(result1, "IV");
+		
+		int num2 = 9;
+		String result2 = t.intToRoman(num2);
+		assertEquals(result2, "IX");
+		
+		int num3 = 58;
+		String result3 = t.intToRoman(num3);
+		assertEquals(result3, "LVIII");
+		
+		int num4 = 1994;
+		String result4 = t.intToRoman(num4);
+		assertEquals(result4, "MCMXCIV");
+		
+	}
 }
