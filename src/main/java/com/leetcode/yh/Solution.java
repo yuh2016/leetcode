@@ -184,7 +184,7 @@ public class Solution {
     }
 	
 	/**
-	 * //10. Regular Expression Matching
+	 * 10. Regular Expression Matching
 	 * @param s string
 	 * @param p pattern
 	 * @return
@@ -206,14 +206,21 @@ public class Solution {
     }
 	
 	/**
-	 * 11. Container With Most Water
+	 * 11. Container With Most Water	//TIME OUT //TODO
 	 * @param height
 	 * @return
 	 */
 	public int maxArea(int[] height) {
 		int max = 0;
 		int tmp = 0;
+		int maxHeight = 0;
 		for(int i=0; i<height.length - 1; i++){
+			if(height[i] > maxHeight){
+				maxHeight = height[i];
+			}else if(i > 0 && height[i] <= maxHeight){
+				continue;
+			}
+			
 			for(int j = i + 1; j < height.length; j++){
 				tmp = (j - i) * min(height[i], height[j]);
 				if(tmp > max){
@@ -231,4 +238,58 @@ public class Solution {
 			return b;
 		}
 	}
+	
+	//12. Integer to Roman
+	/*
+	 * 
+	 *
+I             1
+V             5
+X             10
+L             50
+C             100
+D             500
+M             1000
+
+I can be placed before V (5) and X (10) to make 4 and 9. 
+X can be placed before L (50) and C (100) to make 40 and 90. 
+C can be placed before D (500) and M (1000) to make 400 and 900.
+
+num range: 0 ~ 3999
+	 */
+	public String intToRoman(int num) {
+        int index[] = {1000, 500, 100, 50, 10, 5, 1};
+        String romanIndex[] = {"M", "D", "C", "L", "X", "V", "I"};
+        String convertIndex[] = {"C", "C", "X", "X", "I", "I", null};
+        int result[] = new int[7];
+        int tmp = num;
+        for(int i=0; i<index.length; i++){
+        	result[i] = tmp/index[i];
+        	tmp = tmp % index[i];
+        }
+        
+        StringBuilder romanStr = new StringBuilder();
+        for(int j=0; j<result.length; j++){
+        	if(result[j] > 0 && result[j] % 4 == 0){
+        		//j=0时num >= 4000, 不考虑
+        		//j=1时，index[1]=500, 不可能等于4
+        		if(j > 1){
+        			//有前一位, -> 9， 删除前一个字符串，加上9
+        			if(result[j - 1] == 1){
+        				romanStr.deleteCharAt(romanStr.length() - 1);
+        				romanStr.append(convertIndex[j - 1]).append(romanIndex[j - 2]);
+        			}else{
+        			//没有前一位, -> 4， 直接加上4
+        				romanStr.append(convertIndex[j - 1]).append(romanIndex[j - 1]);
+        			}
+        		}
+        	}else{
+	        	for(int k = 0; k < result[j]; k++){
+	        		romanStr.append(romanIndex[j]);
+	        	}
+        	}
+        }
+        
+		return romanStr.toString();
+    }
 }
