@@ -172,4 +172,20 @@ public class SolutionTest extends TestCase {
 		int result4 = t.romanToInt(s4);
 		assertEquals(result4, 1994);
 	}
+	
+	@Test
+	public void testLongestCommonPrefix(){
+		String[] strs = {"flower","flow","flight"};
+		String prefix = t.longestCommonPrefix(strs);
+		assertEquals(prefix, "fl");
+		
+		String[] strs1 = {"dog","racecar","car"};
+		String prefix1 = t.longestCommonPrefix(strs1);
+		assertEquals(prefix1, "");
+		
+		String[] strs2 = {"flower"};
+		String prefix2 = t.longestCommonPrefix(strs2);
+		assertEquals(prefix2, "flower");
+		
+	}
 }
