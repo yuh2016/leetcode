@@ -148,6 +148,28 @@ public class SolutionTest extends TestCase {
 		int num4 = 1994;
 		String result4 = t.intToRoman(num4);
 		assertEquals(result4, "MCMXCIV");
+	}
+	
+	@Test
+	public void testRomanToInt(){
+		String s = "III";
+		int result = t.romanToInt(s);
+		assertEquals(result, 3);
 		
+		String s1 = "IV";
+		int result1 = t.romanToInt(s1);
+		assertEquals(result1, 4);
+		
+		String s2 = "IX";
+		int result2 = t.romanToInt(s2);
+		assertEquals(result2, 9);
+		
+		String s3 = "LVIII";
+		int result3 = t.romanToInt(s3);
+		assertEquals(result3, 58);
+		
+		String s4 = "MCMXCIV";
+		int result4 = t.romanToInt(s4);
+		assertEquals(result4, 1994);
 	}
 }

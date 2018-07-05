@@ -4,7 +4,9 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Solution {
 	// 004 Median of Two Sorted Arrays
@@ -291,5 +293,27 @@ num range: 0 ~ 3999
         }
         
 		return romanStr.toString();
+    }
+	
+	//13. Roman to Integer
+	public int romanToInt(String s) {
+		int index[] = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+        String romanIndex[] = {"M", "CM", "D", "CD", "C", "XC", "L",  "XL", "X", "IX", "V", "IV", "I"};
+        
+        Map<String, Integer> map = new HashMap<>();
+        for(int i=0; i<index.length; i++){
+        	map.put(romanIndex[i], index[i]);
+        }
+        
+        int num = 0;
+		for (int i = 0; i < s.length(); i++){
+			if(i < s.length() - 1 && map.containsKey(s.substring(i, i + 2))){
+        		num += map.get(s.substring(i, i + 2));
+        		i++;
+			}else{
+        		num += map.get(s.substring(i, i+1));
+			}
+        }
+		return num;
     }
 }
