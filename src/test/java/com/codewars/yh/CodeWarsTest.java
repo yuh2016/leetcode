@@ -4,8 +4,8 @@ import org.junit.Test;
 
 import junit.framework.TestCase;
 
-public class SolutionTest extends TestCase {
-	private static Solution t = new Solution();
+public class CodeWarsTest extends TestCase {
+	private static CodeWars t = new CodeWars();
 	
 	@Test
     public void testSongDecoder() {

@@ -1,5 +1,8 @@
 package com.leetcode.yh;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.Test;
 
 import junit.framework.TestCase;
@@ -187,5 +190,13 @@ public class SolutionTest extends TestCase {
 		String prefix2 = t.longestCommonPrefix(strs2);
 		assertEquals(prefix2, "flower");
 		
+	}
+	
+
+	@Test
+	public void testLetterCombinations(){
+		String str = "23";
+		List<String> result = t.letterCombinations(str);
+		assertEquals(result, Arrays.asList("ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"));
 	}
 }

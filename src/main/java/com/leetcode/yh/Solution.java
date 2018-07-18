@@ -7,6 +7,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Solution {
 	// 004 Median of Two Sorted Arrays
@@ -333,5 +335,70 @@ public class Solution {
 		}else{
 			return first.substring(0, max);
 		}
+	}
+	
+	//15. 3Sum
+	//find all a,b,c that matches a+b+c=0
+	public List<List<Integer>> threeSum(int[] nums) {
+		for (int i = 0; i < nums.length - 1; i++) {
+			for (int j = 0; j < nums.length; j++) {
+				
+			}
+		}
+		
+		return null;
+    }
+	
+	public void findNums(int sum, int[] nums){
+		
+	}
+	
+	// 17.Letter Combinations of a Phone Number
+	//1-, 2-abc, 3-def, 4-ghi, 5-jkl, 6-mno, 7-pqrs, 8-tuv, 9-wxyz
+	public List<String> letterCombinations(String digits) {
+		if(digits.length() == 0){
+			return new ArrayList<>();
+		}
+        char[] nums = digits.toCharArray();
+        
+        Map<String, List<String>> letters = new HashMap<>();
+        letters.put("2", new ArrayList<>(Arrays.asList("a","b","c")));
+        letters.put("3", new ArrayList<>(Arrays.asList("d","e","f")));
+        letters.put("4", new ArrayList<>(Arrays.asList("g","h","i")));
+        letters.put("5", new ArrayList<>(Arrays.asList("j","k","l")));
+        letters.put("6", new ArrayList<>(Arrays.asList("m","n","o")));
+        letters.put("7", new ArrayList<>(Arrays.asList("p","q","r","s")));
+        letters.put("8", new ArrayList<>(Arrays.asList("t","u","v")));
+        letters.put("9", new ArrayList<>(Arrays.asList("w","x","y","z")));
+        
+        List<String> result = letters.get(String.valueOf(nums[0]));
+        for(int i=1; i<nums.length; i++){
+        	result = combineTwoString(result, letters.get(String.valueOf(nums[i])));
+        }
+		return result;
+    }
+	
+	/**
+	 * size a > size b
+	 * @param a
+	 * @param b
+	 * @return
+	 */
+	public List<String> combineTwoString(List<String> a, List<String> b){
+		List<String> result = new ArrayList<String>();
+		for(int i=0; i<a.size(); i++){
+			for(int j=0; j<b.size(); j++){
+				result.add(a.get(i) + b.get(j));
+			}
+		}
+		return result;
+	}
+	
+	public static void main(String[] args){
+		String str = "aa1b";
+		Pattern p = Pattern.compile("[0-9]+"); 
+		Matcher m = p.matcher(str);
+		String s = m.group();
+		System.out.println(s);
 	}
 }
