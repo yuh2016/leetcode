@@ -5,10 +5,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import com.leetcode.yh.Solution.ListNode;
 
 public class Solution {
 	// 004 Median of Two Sorted Arrays
@@ -379,7 +382,6 @@ public class Solution {
     }
 	
 	/**
-	 * size a > size b
 	 * @param a
 	 * @param b
 	 * @return
@@ -394,11 +396,55 @@ public class Solution {
 		return result;
 	}
 	
-	public static void main(String[] args){
-		String str = "aa1b";
-		Pattern p = Pattern.compile("[0-9]+"); 
-		Matcher m = p.matcher(str);
-		String s = m.group();
-		System.out.println(s);
+	//17, excellent solutions
+	public List<String> letterCombinations2(String digits) {
+		LinkedList<String> ans = new LinkedList<String>();
+		if(digits.isEmpty()) return ans;
+		String[] mapping = new String[] {"0", "1", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+		ans.add("");
+		for(int i =0; i<digits.length();i++){
+			int x = Character.getNumericValue(digits.charAt(i));
+			while(ans.peek().length()==i){
+				String t = ans.remove();
+				for(char s : mapping[x].toCharArray())
+					ans.add(t+s);
+			}
+		}
+		return ans;
 	}
+	
+	
+	//Definition for singly-linked list.
+	public class ListNode {
+	    int val;
+	    ListNode next;
+	    ListNode(int x) { val = x; }
+	}
+	 
+	/**
+	 * 19. Remove Nth Node From End of List
+	 * @param head
+	 * @param n
+	 * @return
+	 */
+	public ListNode removeNthFromEnd(ListNode head, int n) {
+		if(n == 0) return head;
+		if(head == null) return null;
+        int len = 1;
+        List<ListNode> nodeList = new ArrayList<>();
+        ListNode next = head.next;
+        nodeList.add(next);
+        while(next != null){
+        	len ++;
+        	nodeList.add(next);
+        	next = next.next;
+        }
+        if(n == len){
+        	return head.next;
+        }
+        
+        int index = len - n;
+        nodeList.get(index - 1).next = index + 1 > len - 1 ? null : nodeList.get(index + 1);
+		return head;
+    }
 }

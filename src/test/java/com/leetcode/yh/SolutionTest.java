@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.junit.Test;
 
+import com.leetcode.yh.Solution.ListNode;
+
 import junit.framework.TestCase;
 
 public class SolutionTest extends TestCase {
@@ -191,12 +193,22 @@ public class SolutionTest extends TestCase {
 		assertEquals(prefix2, "flower");
 		
 	}
-	
 
 	@Test
 	public void testLetterCombinations(){
 		String str = "23";
 		List<String> result = t.letterCombinations(str);
 		assertEquals(result, Arrays.asList("ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"));
+	}
+	
+	@Test
+	public void testRemoveNthFromEnd(){
+		Solution.ListNode head = t.new ListNode(1);
+		head.next = t.new ListNode(2);
+//		head.next.next = t.new ListNode(3);
+//		head.next.next.next = t.new ListNode(4);
+//		head.next.next.next.next = t.new ListNode(5);
+		t.removeNthFromEnd(head, 1);
+		
 	}
 }
