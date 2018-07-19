@@ -238,4 +238,35 @@ public class SolutionTest extends TestCase {
 		boolean result6 = t.isValid(str6);
 		assertEquals(result6, false);
 	}
+	
+	@Test
+	public void testMergeTwoLists(){
+		Solution.ListNode first = t.new ListNode(1);
+		first.next = t.new ListNode(2);
+		first.next.next = t.new ListNode(4);
+
+		Solution.ListNode second = t.new ListNode(1);
+		second.next = t.new ListNode(3);
+		second.next.next = t.new ListNode(4);
+		second.next.next.next = t.new ListNode(5);
+		
+		ListNode result = t.mergeTwoLists(first, second);
+		
+		ListNode tmp = result;
+		assertEquals(1, tmp.val);
+		tmp = tmp.next;
+		assertEquals(1, tmp.val);
+		tmp = tmp.next;
+		assertEquals(2, tmp.val);
+		tmp = tmp.next;
+		assertEquals(3, tmp.val);
+		tmp = tmp.next;
+		assertEquals(4, tmp.val);
+		tmp = tmp.next;
+		assertEquals(4, tmp.val);
+		tmp = tmp.next;
+		assertEquals(5, tmp.val);
+		tmp = tmp.next;
+		
+	}
 }

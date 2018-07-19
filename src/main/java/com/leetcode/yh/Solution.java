@@ -515,4 +515,30 @@ public class Solution {
 		}
 		return stack.isEmpty();
 	}
+	
+	//21. Merge Two Sorted Lists
+	//Input: 1->2->4, 1->3->4
+	//Output: 1->1->2->3->4->4
+	public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        ListNode first = l1;
+        ListNode second = l2;
+        ListNode head = new ListNode(0);
+        ListNode tmp = head;
+        while(first != null && second != null){
+        	if(first.val <= second.val){
+        		tmp.next = new ListNode(first.val);
+        		first = first.next;
+        	}else{
+        		tmp.next = new ListNode(second.val);
+        		second = second.next;
+        	}
+        	tmp = tmp.next;
+        }
+        if(first == null){
+        	tmp.next = second;
+        }else{
+        	tmp.next = first;
+        }
+        return head.next;
+    }
 }
