@@ -36,16 +36,20 @@ your_order("is2 Thi1s T4est 3a")
 		}
 		//sb了。。。
 		//正则也可以匹配非数字呀。。。
+		//String.join(" ", result);
 		return Arrays.stream(result).reduce("", (x,y) -> (x == null ? "" : x) + " " + (y == null ? "" : y)).trim(); 
 	}
 	
+	//大神的方法。。。
 	public static String order2(String words){
 		return Arrays.stream(words.split(" "))
+		//第一个
 		.sorted(Comparator.comparing(s -> Integer.valueOf(s.replaceAll("\\D", ""))))
+//			.reduce((a, b) -> a + " " + b).get();
+		//第二个
 //			.sorted((a, b) -> {
 //                return a.replaceAll("\\D+", "").compareTo(b.replaceAll("\\D+", ""));
 //             })
-//			.reduce((a, b) -> a + " " + b).get();
 		.collect(Collectors.joining(" "));
 	}
 }
