@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -432,8 +433,8 @@ public class Solution {
 		if(head == null) return null;
         int len = 1;
         List<ListNode> nodeList = new ArrayList<>();
+        nodeList.add(head);
         ListNode next = head.next;
-        nodeList.add(next);
         while(next != null){
         	len ++;
         	nodeList.add(next);
@@ -444,7 +445,74 @@ public class Solution {
         }
         
         int index = len - n;
-        nodeList.get(index - 1).next = index + 1 > len - 1 ? null : nodeList.get(index + 1);
-		return head;
+        
+        if(index + 1 > len -1){
+        	nodeList.get(index - 1).next = null;	
+        }else{
+        	nodeList.get(index - 1).next = nodeList.get(index + 1);
+        }
+        return head;
     }
+	
+	//solutions: 2个指针，a比b多n,所以a到最后时，b就在len-n处，直接修改b的next就行了。
+	public ListNode removeNthFromEnd2(ListNode head, int n) {
+	    ListNode dummy = new ListNode(0);
+	    dummy.next = head;
+	    ListNode first = dummy;
+	    ListNode second = dummy;
+	    // Advances first pointer so that the gap between first and second is n nodes apart
+	    for (int i = 1; i <= n + 1; i++) {
+	        first = first.next;
+	    }
+	    // Move first to the end, maintaining the gap
+	    while (first != null) {
+	        first = first.next;
+	        second = second.next;
+	    }
+	    second.next = second.next.next;
+	    return dummy.next;
+	}
+	
+	//20. Valid Parentheses
+	//'(', ')', '{', '}', '[' and ']'
+	//判断括号是否有效：有关就有闭；顺序一致
+	public boolean isValid(String s) {
+		char[] chars = s.toCharArray();
+        Stack<Character> stack = new Stack<>();
+        HashMap<Character, Character> cmap = new HashMap<>();
+        cmap.put('(', ')');
+        cmap.put('{', '}');
+        cmap.put('[', ']');
+        for(char c : chars){
+        	if(cmap.containsKey(c)){
+        		stack.push(c);
+        	}else{
+        		if(stack.isEmpty()){
+        			return false;
+        		}
+        		Character chr = stack.pop();
+        		if(chr == null || cmap.get(chr) == null || !cmap.get(chr).equals(c)){
+        			return false;
+        		}
+        	}
+        }
+        return stack.isEmpty();
+    }
+	
+	
+	//简洁方法：
+	public boolean isValid2(String s) {
+		Stack<Character> stack = new Stack<Character>();
+		for (char c : s.toCharArray()) {
+			if (c == '(')
+				stack.push(')');
+			else if (c == '{')
+				stack.push('}');
+			else if (c == '[')
+				stack.push(']');
+			else if (stack.isEmpty() || stack.pop() != c)
+				return false;
+		}
+		return stack.isEmpty();
+	}
 }

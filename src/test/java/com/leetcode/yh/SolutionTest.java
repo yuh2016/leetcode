@@ -211,4 +211,31 @@ public class SolutionTest extends TestCase {
 		t.removeNthFromEnd(head, 1);
 		
 	}
+	
+	@Test
+	public void testIsValid(){
+		String str = "()";
+		boolean result = t.isValid(str);
+		assertEquals(result, true);
+		
+		String str2 = "()[]{}";
+		boolean result2 = t.isValid(str2);
+		assertEquals(result2, true);
+		
+		String str3 = "(]";
+		boolean result3 = t.isValid(str3);
+		assertEquals(result3, false);
+		
+		String str4 = "([)]";
+		boolean result4 = t.isValid(str4);
+		assertEquals(result4, false);
+		
+		String str5 = "{[]}";
+		boolean result5 = t.isValid(str5);
+		assertEquals(result5, true);
+		
+		String str6 = "]";
+		boolean result6 = t.isValid(str6);
+		assertEquals(result6, false);
+	}
 }
