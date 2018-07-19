@@ -1,5 +1,7 @@
 package com.codewars.yh;
 
+import java.util.HashMap;
+
 public class CodeWars {
 	public static String SongDecoder(String song) {
 		// Your code is here...

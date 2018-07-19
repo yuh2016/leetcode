@@ -344,13 +344,17 @@ public class Solution {
 	//15. 3Sum
 	//find all a,b,c that matches a+b+c=0
 	public List<List<Integer>> threeSum(int[] nums) {
-		for (int i = 0; i < nums.length - 1; i++) {
-			for (int j = 0; j < nums.length; j++) {
-				
+		List<List<Integer>> list = new ArrayList<>();
+		for (int i = 0; i < nums.length - 2; i++) {
+			for (int j = i + 1; j < nums.length - 1; j++) {
+				for(int k = j + 1; k < nums.length; k++){
+					if(nums[i] + nums[j] + nums[k] == 0){
+						list.add(new ArrayList<Integer>(Arrays.asList(nums[i], nums[j], nums[k])));
+					}
+				}
 			}
 		}
-		
-		return null;
+		return list;
     }
 	
 	public void findNums(int sum, int[] nums){
