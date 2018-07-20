@@ -21,6 +21,12 @@ If you don't find two consecutive F(m) verifying F(m) * F(m+1) = prodyou will re
 
 [F(m), F(m+1), false] or {F(n), F(n+1), 0} or (F(n), F(n+1), False)
 F(m) being the smallest one such as F(m) * F(m+1) > prod.
+
+
+Notes: Not useful here but we can tell how to choose the number n up to which to go: 
+we can use the "golden ratio" phi which is (1 + sqrt(5))/2 
+knowing that F(n) is asymptotic to: phi^n / sqrt(5). 
+That gives a possible upper bound to n.
 	 * @param prod
 	 * @return
 	 */
