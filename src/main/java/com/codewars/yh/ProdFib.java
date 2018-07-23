@@ -32,25 +32,19 @@ That gives a possible upper bound to n.
 	 */
 	public static long[] productFib(long prod) {
 	    // your code
-		int n = 0;
-		int a = fib(n);
-		int b = fib(n + 1);
-		int tmp = a * b;
+		long a = 0;	//f(0)
+		long b = 1;	//f(1);
+		long tmp = a * b;
 		while(prod > tmp){
-			a = b;
-			b = fib(++n + 1);
+			b = a + b;
+			a = b - a;
 			tmp = a * b;
 		}
 		return new long[]{a, b, tmp == prod ? 1 : 0};
 	}
 	
-	private static int fib(int n){
-		if (n == 0) {
-			return 0;
-		} else if (n == 1) {
-			return 1;
-		} else {
-			return fib(n - 1) + fib(n - 2);
-		}
-	}
+	/**
+	 * 问题：开始a,b都用的int型，结果提交超时。
+	 * 猜测原因：prod > int.max时， tmp为int,总是<int.max，则prod总是>tmp，死循环
+	 */
 }

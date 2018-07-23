@@ -17,4 +17,11 @@ public class ProdFibTest {
 		long[] r = new long[] {89, 144, 0};
 		assertArrayEquals(r, ProdFib.productFib(5895));
 	}
+	@Test
+	public void test3() {
+		long[] test = ProdFib.productFib(998876545665545555L);
+		for(int i=0; i<test.length; i++){
+			System.out.println(test[i]);
+		}
+	}
 }
