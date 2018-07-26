@@ -12,7 +12,7 @@ import org.junit.runners.Parameterized.Parameters;
 public class ParseMoleculeTest {
 	@Parameters
     public static Collection<Object[]> data() {
-        return Arrays.asList( new Object[][] { {Arrays.asList("H", "O"),
+        return Arrays.asList( new Object[][] { /*{Arrays.asList("H", "O"),
                                                 Arrays.asList( 2,   1 ),
                                                 "H2O",
                                                 "water"},
@@ -25,8 +25,12 @@ public class ParseMoleculeTest {
                                                {Arrays.asList("K", "O", "N", "S"),
                                                 Arrays.asList( 4,   14,  2,   4 ),
                                                 "K4[ON(SO3)2]2",
-                                                "Fremy's salt"},
-                                               {Arrays.asList("", "", "", "")}
+                                                "Fremy's salt"},*/
+                                               
+                                               
+                                               {Arrays.asList("Mg", "H", "O"),
+                                            	   Arrays.asList(1, 2, 2),
+                                            	   "{((H)2)[O]}", "Fremy's salt"}
                               });
     }
     

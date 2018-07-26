@@ -14,8 +14,10 @@ public class ParseMolecule {
 	//Au5(C2H5[OH)3Li]3	//wrong formula
 	//Mg(OH]2
 	public static Map<String,Integer> getAtoms(String formula) {
-		formula.toLowerCase();
-		
+		String lower = formula.toLowerCase();
+		if(lower.equals(formula)){
+			throw new IllegalArgumentException(); 
+		}
 		
         // Your code here!
 		String reverse = new StringBuilder(formula).reverse().toString();
@@ -86,6 +88,19 @@ public class ParseMolecule {
 				}
 				char charCnt = multiStack.pop();
 				multi /= Character.getNumericValue(charCnt);
+			}else if(c == ')' || c == ']' || c == '}'){
+				if(i - 1 >= 0){
+					char preCh = reverse.charAt(i - 1);
+					if(Character.isDigit(preCh) || Character.isLetter(preCh)){
+						
+					}else {
+						multiStack.push('1');
+						multiStack.push(charMap.get(c));
+					}
+				}else{
+					multiStack.push('1');
+					multiStack.push(charMap.get(c));
+				}
 			}
 			i++;
 		}
