@@ -3,16 +3,14 @@ package com.leetcode.yh;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.List;
+
 import java.util.Map;
 import java.util.Stack;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-import com.leetcode.yh.Solution.ListNode;
 
 public class Solution {
 	// 004 Median of Two Sorted Arrays
@@ -345,11 +343,22 @@ public class Solution {
 	//find all a,b,c that matches a+b+c=0
 	public List<List<Integer>> threeSum(int[] nums) {
 		List<List<Integer>> list = new ArrayList<>();
+		Arrays.sort(nums);
+		
 		for (int i = 0; i < nums.length - 2; i++) {
+			if(i > 0 && nums[i] == nums[i - 1]){
+				continue;
+			}
+			int index = nums.length;
 			for (int j = i + 1; j < nums.length - 1; j++) {
-				for(int k = j + 1; k < nums.length; k++){
+				for(int k = j + 1; k < index; k++){
 					if(nums[i] + nums[j] + nums[k] == 0){
 						list.add(new ArrayList<Integer>(Arrays.asList(nums[i], nums[j], nums[k])));
+						index = k;
+						break;
+					}else if(nums[i] + nums[j] + nums[k] > 0){
+						index = k;
+						break;
 					}
 				}
 			}
