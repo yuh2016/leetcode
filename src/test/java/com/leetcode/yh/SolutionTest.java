@@ -224,6 +224,30 @@ public class SolutionTest extends TestCase {
 	}
 	
 	@Test
+	public void testFourSum(){
+//		int[] nums = {1, 0, -1, 0, -2, 2};
+//		List<List<Integer>> list = t.fourSum(nums, 0);
+//		System.out.println("testFourSum -> " + list.toString());
+		
+//		int[] nums2 = {-1,0,1,2,-1,-4};
+//		List<List<Integer>> list2 = t.fourSum(nums2, -1);
+//		System.out.println(list2.toString());
+		
+//		int[] nums3 = {-3,-2,-1,0,0,1,2,3};
+//		List<List<Integer>> list3 = t.fourSum(nums3, 0);
+//		System.out.println("testFourSum -> " + list3.toString());
+		
+//		int[] nums4 = {-1,-5,-5,-3,2,5,0,4};
+//		List<List<Integer>> list4 = t.fourSum(nums4, -7);
+//		System.out.println(list4.toString());
+		
+		int[] nums5 = {-1,0,-5,-2,-2,-4,0,1,-2};
+		List<List<Integer>> list5 = t.fourSum(nums5, -9);
+		System.out.println(list5.toString());
+		
+	}
+	
+	@Test
 	public void testRemoveNthFromEnd(){
 		Solution.ListNode head = t.new ListNode(1);
 		head.next = t.new ListNode(2);
@@ -231,7 +255,6 @@ public class SolutionTest extends TestCase {
 //		head.next.next.next = t.new ListNode(4);
 //		head.next.next.next.next = t.new ListNode(5);
 		t.removeNthFromEnd(head, 1);
-		
 	}
 	
 	@Test

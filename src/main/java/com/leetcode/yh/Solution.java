@@ -436,6 +436,41 @@ public class Solution {
         }
 		return num;
     }
+	
+	//大神的方法
+	/*
+	Similar to 3 Sum problem, use 3 pointers to point current element, 
+	next element and the last element. If the sum is less than target, 
+	it means we have to add a larger element so next element move to the next. 
+	If the sum is greater, it means we have to add a smaller element so last element move to the second last element. 
+	Keep doing this until the end. Each time compare the difference between sum and target, 
+	if it is less than minimum difference so far, then replace result with it, otherwise keep iterating.
+	
+	用3个指针，一个指向当前元素，第二个指向下一个元素，第三个指向最后元素
+	如果三个数相加>target, 则第三个元素前移；如果三个数相加<target，则第二个元素后移
+	
+	求2个数相加也可用这种方法。
+	善用指针。
+	*/
+	public int threeSumClosest2(int[] num, int target) {
+        int result = num[0] + num[1] + num[num.length - 1];
+        Arrays.sort(num);
+        for (int i = 0; i < num.length - 2; i++) {
+            int start = i + 1, end = num.length - 1;
+            while (start < end) {
+                int sum = num[i] + num[start] + num[end];
+                if (sum > target) {
+                    end--;
+                } else {
+                    start++;
+                }
+                if (Math.abs(sum - target) < Math.abs(result - target)) {
+                    result = sum;
+                }
+            }
+        }
+        return result;
+    }
 
 	// 17.Letter Combinations of a Phone Number
 	// 1-, 2-abc, 3-def, 4-ghi, 5-jkl, 6-mno, 7-pqrs, 8-tuv, 9-wxyz
@@ -461,7 +496,7 @@ public class Solution {
 		}
 		return result;
 	}
-
+	
 	/**
 	 * @param a
 	 * @param b
@@ -476,6 +511,79 @@ public class Solution {
 		}
 		return result;
 	}
+	
+	//18. 4Sum
+	/*
+	 ==!  一点点挤牙膏写出来的。。。各种情况没考虑清楚。。。
+	 */
+	public List<List<Integer>> fourSum(int[] nums, int target) {
+		List<List<Integer>> result = new ArrayList<>();
+        Arrays.sort(nums);
+		for (int i = 0; i < nums.length; i++) {
+			if(i > 0 && nums[i] == nums[i - 1]){
+				continue;
+			}
+			for (int j = i + 1; j < nums.length; j++) {
+				if(j > i + 1 && nums[j] == nums[j - 1]){
+					continue;
+				}
+				int left = j + 1;
+				int right = nums.length - 1;
+				
+				Integer lastLeft = left;
+				Integer lastRight = right;
+				boolean leftChange = false;
+				boolean rightChange = false;
+				while(left < right){
+					if(leftChange && rightChange){
+						if(nums[lastLeft] == nums[left] && nums[lastRight] == nums[right]){
+							left ++;
+							right --;
+							leftChange = true;
+							rightChange = true;
+							continue;
+						}
+					}
+					if(leftChange && !rightChange && nums[lastLeft] == nums[left]){
+						left ++;
+						leftChange = true;
+						continue;
+					}
+					
+					if(rightChange && !leftChange && nums[lastRight] == nums[right]){
+						right --;
+						rightChange = true;
+						continue;
+					}
+					leftChange = false;
+					rightChange = false;
+					int sum = nums[i] + nums[j] + nums[left] + nums[right];
+					if(sum == target){
+						List<Integer> list = new ArrayList<>();
+						list.add(nums[i]);
+						list.add(nums[j]);
+						list.add(nums[left]);
+						list.add(nums[right]);
+						result.add(list);
+						lastLeft = left;
+						lastRight = right;
+						left ++;
+						right --;
+						leftChange = true;
+						rightChange = true;
+					}else if(sum < target){
+						left ++;
+						leftChange = true;
+					}else{
+						//sum > target
+						right --;
+						rightChange = true;
+					}
+				}
+			}
+		}
+		return result;
+    }
 
 	// 17, excellent solutions
 	public List<String> letterCombinations2(String digits) {
