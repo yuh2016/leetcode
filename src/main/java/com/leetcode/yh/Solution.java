@@ -416,6 +416,26 @@ public class Solution {
 
 	    return -1;
 	}
+	
+	//16. 3Sum Closest
+	//¾ÓÈ»Ã»ÏÓÎÒÂı¡£¡£¡£
+	public int threeSumClosest(int[] nums, int target) {
+		int num = nums[0] + nums[1] + nums[2];
+		int flag = Math.abs(num - target);
+        for(int i = 0; i<nums.length; i++){
+        	for(int j=i + 1; j<nums.length; j++){
+        		for(int k= j + 1; k<nums.length; k++){
+        			int plus = nums[i] + nums[j] + nums[k];
+        			int tmp = Math.abs(plus - target);
+        			if(tmp < flag){
+        				num = plus;
+        				flag= tmp;
+        			}
+        		}
+        	}
+        }
+		return num;
+    }
 
 	// 17.Letter Combinations of a Phone Number
 	// 1-, 2-abc, 3-def, 4-ghi, 5-jkl, 6-mno, 7-pqrs, 8-tuv, 9-wxyz

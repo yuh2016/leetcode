@@ -208,6 +208,13 @@ public class SolutionTest extends TestCase {
 		List<List<Integer>> list3 = t.threeSum2(nums3);
 		System.out.println(list3.toString());
 	}
+	
+	@Test
+	public void testThreeSumClosest(){
+		int[] nums = {-1, 2, 1, -4};
+		int result = t.threeSumClosest(nums, 1);
+		assertEquals(2, result);
+	}
 
 	@Test
 	public void testLetterCombinations(){
