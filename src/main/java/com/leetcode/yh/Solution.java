@@ -11,7 +11,6 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Stack;
 
-
 public class Solution {
 	// 004 Median of Two Sorted Arrays
 	public double findMedianSortedArrays(int[] nums1, int[] nums2) {
@@ -312,7 +311,7 @@ public class Solution {
 
 	// 14. Longest Common Prefix
 	public String longestCommonPrefix(String[] strs) {
-		if(strs.length == 0){
+		if (strs.length == 0) {
 			return "";
 		}
 		String first = strs[0];
@@ -320,43 +319,43 @@ public class Solution {
 		for (int i = 1; i < strs.length; i++) {
 			int tmp = 0;
 			int len = first.length() < strs[i].length() ? first.length() : strs[i].length();
-			for(int j = 0; j < len ; j++){
-				if(first.charAt(j) == strs[i].charAt(j)){
+			for (int j = 0; j < len; j++) {
+				if (first.charAt(j) == strs[i].charAt(j)) {
 					tmp++;
-				}else{
+				} else {
 					break;
 				}
 			}
-			if(tmp < max){
+			if (tmp < max) {
 				max = tmp;
 			}
 		}
-		
-		if(max == 0){
+
+		if (max == 0) {
 			return "";
-		}else{
+		} else {
 			return first.substring(0, max);
 		}
 	}
-	
-	//15. 3Sum
-	//find all a,b,c that matches a+b+c=0
+
+	// 15. 3Sum
+	// find all a,b,c that matches a+b+c=0
 	public List<List<Integer>> threeSum(int[] nums) {
 		List<List<Integer>> list = new ArrayList<>();
 		Arrays.sort(nums);
-		
+
 		for (int i = 0; i < nums.length - 2; i++) {
-			if(i > 0 && nums[i] == nums[i - 1]){
+			if (i > 0 && nums[i] == nums[i - 1]) {
 				continue;
 			}
 			int index = nums.length;
 			for (int j = i + 1; j < nums.length - 1; j++) {
-				for(int k = j + 1; k < index; k++){
-					if(nums[i] + nums[j] + nums[k] == 0){
+				for (int k = j + 1; k < index; k++) {
+					if (nums[i] + nums[j] + nums[k] == 0) {
 						list.add(new ArrayList<Integer>(Arrays.asList(nums[i], nums[j], nums[k])));
 						index = k;
 						break;
-					}else if(nums[i] + nums[j] + nums[k] > 0){
+					} else if (nums[i] + nums[j] + nums[k] > 0) {
 						index = k;
 						break;
 					}
@@ -364,156 +363,210 @@ public class Solution {
 			}
 		}
 		return list;
-    }
-	
-	public void findNums(int sum, int[] nums){
-		
 	}
-	
+
+	// 使用二分查找
+	public List<List<Integer>> threeSum2(int[] nums) {
+		List<List<Integer>> list = new ArrayList<>();
+		Arrays.sort(nums);
+		for (int i = 0; i < nums.length; i++) {
+			if (i > 0 && nums[i] == nums[i - 1]) {
+				continue;
+			}
+			for (int j = i + 1; j < nums.length; j++) {
+				if (j > 1 && nums[j] == nums[j - 1] && j != i + 1) {
+					continue;
+				}
+				int index = binarySearch(nums, j + 1, 0 - nums[i] - nums[j]);
+				if(index > j){
+					List<Integer> sums = new ArrayList<>();
+					sums.add(nums[i]);
+					sums.add(nums[j]);
+					sums.add(nums[index]);
+					list.add(sums);
+				}
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * 二分查找
+	 * @param nums
+	 * @param n
+	 * @return
+	 */
+	public int binarySearch(int[] array, int left, int key) {
+	    int right = array.length - 1;
+
+	    // 这里必须是 <=
+	    while (left <= right) {
+	        int mid = (left + right) / 2;
+	        if (array[mid] == key) {
+	            return mid;
+	        }
+	        else if (array[mid] < key) {
+	            left = mid + 1;
+	        }
+	        else {
+	            right = mid - 1;
+	        }
+	    }
+
+	    return -1;
+	}
+
 	// 17.Letter Combinations of a Phone Number
-	//1-, 2-abc, 3-def, 4-ghi, 5-jkl, 6-mno, 7-pqrs, 8-tuv, 9-wxyz
+	// 1-, 2-abc, 3-def, 4-ghi, 5-jkl, 6-mno, 7-pqrs, 8-tuv, 9-wxyz
 	public List<String> letterCombinations(String digits) {
-		if(digits.length() == 0){
+		if (digits.length() == 0) {
 			return new ArrayList<>();
 		}
-        char[] nums = digits.toCharArray();
-        
-        Map<String, List<String>> letters = new HashMap<>();
-        letters.put("2", new ArrayList<>(Arrays.asList("a","b","c")));
-        letters.put("3", new ArrayList<>(Arrays.asList("d","e","f")));
-        letters.put("4", new ArrayList<>(Arrays.asList("g","h","i")));
-        letters.put("5", new ArrayList<>(Arrays.asList("j","k","l")));
-        letters.put("6", new ArrayList<>(Arrays.asList("m","n","o")));
-        letters.put("7", new ArrayList<>(Arrays.asList("p","q","r","s")));
-        letters.put("8", new ArrayList<>(Arrays.asList("t","u","v")));
-        letters.put("9", new ArrayList<>(Arrays.asList("w","x","y","z")));
-        
-        List<String> result = letters.get(String.valueOf(nums[0]));
-        for(int i=1; i<nums.length; i++){
-        	result = combineTwoString(result, letters.get(String.valueOf(nums[i])));
-        }
+		char[] nums = digits.toCharArray();
+
+		Map<String, List<String>> letters = new HashMap<>();
+		letters.put("2", new ArrayList<>(Arrays.asList("a", "b", "c")));
+		letters.put("3", new ArrayList<>(Arrays.asList("d", "e", "f")));
+		letters.put("4", new ArrayList<>(Arrays.asList("g", "h", "i")));
+		letters.put("5", new ArrayList<>(Arrays.asList("j", "k", "l")));
+		letters.put("6", new ArrayList<>(Arrays.asList("m", "n", "o")));
+		letters.put("7", new ArrayList<>(Arrays.asList("p", "q", "r", "s")));
+		letters.put("8", new ArrayList<>(Arrays.asList("t", "u", "v")));
+		letters.put("9", new ArrayList<>(Arrays.asList("w", "x", "y", "z")));
+
+		List<String> result = letters.get(String.valueOf(nums[0]));
+		for (int i = 1; i < nums.length; i++) {
+			result = combineTwoString(result, letters.get(String.valueOf(nums[i])));
+		}
 		return result;
-    }
-	
+	}
+
 	/**
 	 * @param a
 	 * @param b
 	 * @return
 	 */
-	public List<String> combineTwoString(List<String> a, List<String> b){
+	public List<String> combineTwoString(List<String> a, List<String> b) {
 		List<String> result = new ArrayList<String>();
-		for(int i=0; i<a.size(); i++){
-			for(int j=0; j<b.size(); j++){
+		for (int i = 0; i < a.size(); i++) {
+			for (int j = 0; j < b.size(); j++) {
 				result.add(a.get(i) + b.get(j));
 			}
 		}
 		return result;
 	}
-	
-	//17, excellent solutions
+
+	// 17, excellent solutions
 	public List<String> letterCombinations2(String digits) {
 		LinkedList<String> ans = new LinkedList<String>();
-		if(digits.isEmpty()) return ans;
-		String[] mapping = new String[] {"0", "1", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+		if (digits.isEmpty())
+			return ans;
+		String[] mapping = new String[] { "0", "1", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz" };
 		ans.add("");
-		for(int i =0; i<digits.length();i++){
+		for (int i = 0; i < digits.length(); i++) {
 			int x = Character.getNumericValue(digits.charAt(i));
-			while(ans.peek().length()==i){
+			while (ans.peek().length() == i) {
 				String t = ans.remove();
-				for(char s : mapping[x].toCharArray())
-					ans.add(t+s);
+				for (char s : mapping[x].toCharArray())
+					ans.add(t + s);
 			}
 		}
 		return ans;
 	}
-	
-	
-	//Definition for singly-linked list.
+
+	// Definition for singly-linked list.
 	public class ListNode {
-	    int val;
-	    ListNode next;
-	    ListNode(int x) { val = x; }
+		int val;
+		ListNode next;
+
+		ListNode(int x) {
+			val = x;
+		}
 	}
-	 
+
 	/**
 	 * 19. Remove Nth Node From End of List
+	 * 
 	 * @param head
 	 * @param n
 	 * @return
 	 */
 	public ListNode removeNthFromEnd(ListNode head, int n) {
-		if(n == 0) return head;
-		if(head == null) return null;
-        int len = 1;
-        List<ListNode> nodeList = new ArrayList<>();
-        nodeList.add(head);
-        ListNode next = head.next;
-        while(next != null){
-        	len ++;
-        	nodeList.add(next);
-        	next = next.next;
-        }
-        if(n == len){
-        	return head.next;
-        }
-        
-        int index = len - n;
-        
-        if(index + 1 > len -1){
-        	nodeList.get(index - 1).next = null;	
-        }else{
-        	nodeList.get(index - 1).next = nodeList.get(index + 1);
-        }
-        return head;
-    }
-	
-	//solutions: 2个指针，a比b多n,所以a到最后时，b就在len-n处，直接修改b的next就行了。
-	public ListNode removeNthFromEnd2(ListNode head, int n) {
-	    ListNode dummy = new ListNode(0);
-	    dummy.next = head;
-	    ListNode first = dummy;
-	    ListNode second = dummy;
-	    // Advances first pointer so that the gap between first and second is n nodes apart
-	    for (int i = 1; i <= n + 1; i++) {
-	        first = first.next;
-	    }
-	    // Move first to the end, maintaining the gap
-	    while (first != null) {
-	        first = first.next;
-	        second = second.next;
-	    }
-	    second.next = second.next.next;
-	    return dummy.next;
+		if (n == 0)
+			return head;
+		if (head == null)
+			return null;
+		int len = 1;
+		List<ListNode> nodeList = new ArrayList<>();
+		nodeList.add(head);
+		ListNode next = head.next;
+		while (next != null) {
+			len++;
+			nodeList.add(next);
+			next = next.next;
+		}
+		if (n == len) {
+			return head.next;
+		}
+
+		int index = len - n;
+
+		if (index + 1 > len - 1) {
+			nodeList.get(index - 1).next = null;
+		} else {
+			nodeList.get(index - 1).next = nodeList.get(index + 1);
+		}
+		return head;
 	}
-	
-	//20. Valid Parentheses
-	//'(', ')', '{', '}', '[' and ']'
-	//判断括号是否有效：有关就有闭；顺序一致
+
+	// solutions: 2个指针，a比b多n,所以a到最后时，b就在len-n处，直接修改b的next就行了。
+	public ListNode removeNthFromEnd2(ListNode head, int n) {
+		ListNode dummy = new ListNode(0);
+		dummy.next = head;
+		ListNode first = dummy;
+		ListNode second = dummy;
+		// Advances first pointer so that the gap between first and second is n
+		// nodes apart
+		for (int i = 1; i <= n + 1; i++) {
+			first = first.next;
+		}
+		// Move first to the end, maintaining the gap
+		while (first != null) {
+			first = first.next;
+			second = second.next;
+		}
+		second.next = second.next.next;
+		return dummy.next;
+	}
+
+	// 20. Valid Parentheses
+	// '(', ')', '{', '}', '[' and ']'
+	// 判断括号是否有效：有关就有闭；顺序一致
 	public boolean isValid(String s) {
 		char[] chars = s.toCharArray();
-        Stack<Character> stack = new Stack<>();
-        HashMap<Character, Character> cmap = new HashMap<>();
-        cmap.put('(', ')');
-        cmap.put('{', '}');
-        cmap.put('[', ']');
-        for(char c : chars){
-        	if(cmap.containsKey(c)){
-        		stack.push(c);
-        	}else{
-        		if(stack.isEmpty()){
-        			return false;
-        		}
-        		Character chr = stack.pop();
-        		if(chr == null || cmap.get(chr) == null || !cmap.get(chr).equals(c)){
-        			return false;
-        		}
-        	}
-        }
-        return stack.isEmpty();
-    }
-	
-	
-	//简洁方法：
+		Stack<Character> stack = new Stack<>();
+		HashMap<Character, Character> cmap = new HashMap<>();
+		cmap.put('(', ')');
+		cmap.put('{', '}');
+		cmap.put('[', ']');
+		for (char c : chars) {
+			if (cmap.containsKey(c)) {
+				stack.push(c);
+			} else {
+				if (stack.isEmpty()) {
+					return false;
+				}
+				Character chr = stack.pop();
+				if (chr == null || cmap.get(chr) == null || !cmap.get(chr).equals(c)) {
+					return false;
+				}
+			}
+		}
+		return stack.isEmpty();
+	}
+
+	// 简洁方法：
 	public boolean isValid2(String s) {
 		Stack<Character> stack = new Stack<Character>();
 		for (char c : s.toCharArray()) {
@@ -528,30 +581,30 @@ public class Solution {
 		}
 		return stack.isEmpty();
 	}
-	
-	//21. Merge Two Sorted Lists
-	//Input: 1->2->4, 1->3->4
-	//Output: 1->1->2->3->4->4
+
+	// 21. Merge Two Sorted Lists
+	// Input: 1->2->4, 1->3->4
+	// Output: 1->1->2->3->4->4
 	public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-        ListNode first = l1;
-        ListNode second = l2;
-        ListNode head = new ListNode(0);
-        ListNode tmp = head;
-        while(first != null && second != null){
-        	if(first.val <= second.val){
-        		tmp.next = new ListNode(first.val);
-        		first = first.next;
-        	}else{
-        		tmp.next = new ListNode(second.val);
-        		second = second.next;
-        	}
-        	tmp = tmp.next;
-        }
-        if(first == null){
-        	tmp.next = second;
-        }else{
-        	tmp.next = first;
-        }
-        return head.next;
-    }
+		ListNode first = l1;
+		ListNode second = l2;
+		ListNode head = new ListNode(0);
+		ListNode tmp = head;
+		while (first != null && second != null) {
+			if (first.val <= second.val) {
+				tmp.next = new ListNode(first.val);
+				first = first.next;
+			} else {
+				tmp.next = new ListNode(second.val);
+				second = second.next;
+			}
+			tmp = tmp.next;
+		}
+		if (first == null) {
+			tmp.next = second;
+		} else {
+			tmp.next = first;
+		}
+		return head.next;
+	}
 }
