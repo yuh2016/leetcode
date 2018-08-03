@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 import java.util.Map;
+import java.util.Optional;
 import java.util.Stack;
 
 public class Solution {
@@ -35,7 +36,7 @@ public class Solution {
 
 	// 005 Longest Palindromic Substring //TIME OUT TODO
 	public String longestPalindrome(String s) {
-		String maxStr = null;
+		String maxStr = "";
 
 		int maxLen = 0;
 		for (int i = 0; i < s.length(); i++) {
@@ -47,6 +48,34 @@ public class Solution {
 				}
 			}
 		}
+		
+		/*
+		//²»¶Ô
+		char[] array = s.toCharArray();
+		for(int i=0; i<s.length(); i++){
+			int left = i;
+			int right = s.length() - 1;
+			while(array[right] != array[left] && right >= left && right > 0){
+				right --;
+			}
+			
+			if(right == 0){
+				String tmp = String.valueOf(array[left]);
+				if(tmp.length() > maxStr.length()) maxStr = tmp;
+				continue;
+			}
+			
+			int rightMax = right;
+			while(left < right && right >= 0 && left <s.length() && array[right] == array[left]){
+				right --;
+				left ++;
+			}
+			
+			if(right - left == 1 || left - right == 1 || right == left){
+				String tmp = s.substring(i, rightMax + 1);
+				if(tmp.length() > maxStr.length()) maxStr = tmp;
+			}
+		}*/
 
 		/*
 		 * if (s.length() == 1) { return s; } for (int i = 0; i < s.length();
@@ -735,4 +764,49 @@ public class Solution {
 		}
 		return head.next;
 	}
+	
+	//22. Generate Parentheses
+	public List<String> generateParenthesis(int n) {
+        List<String> list = new ArrayList<>();
+        
+        return list;
+    }
+	
+	//23. Merge k Sorted Lists
+	/*
+	 Input:
+	[
+	  1->4->5,
+	  1->3->4,
+	  2->6
+	]
+	Output: 1->1->2->3->4->4->5->6
+	 */
+	public ListNode mergeKLists(ListNode[] lists) {
+        if(lists.length == 0) return null;
+        if(lists.length == 1) return lists[0];
+        ListNode first = lists[0];
+        int index = 1;
+        while(index < lists.length){
+        	first = mergeTwoLists(first, lists[index]);
+        	index ++;
+        }
+        return first;
+    }
+	
+	public ListNode mergeKLists2(ListNode[] lists) {
+        List<Integer> nums = new ArrayList<>();
+        for(int i = 0; i < lists.length; i++){
+        	ListNode node = lists[i];
+        	while(node != null){
+        		nums.add(node.val);
+        		node = node.next;
+        	}
+        }
+        
+        if(nums.isEmpty()) return null;
+        ListNode first = new ListNode(0);
+        nums.stream().sorted().map(num -> new ListNode(num)).reduce(first, (a, b) -> {a.next = b; return b;});
+        return first.next;
+    }
 }

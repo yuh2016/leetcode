@@ -1,5 +1,6 @@
 package com.leetcode.yh;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -29,6 +30,7 @@ public class SolutionTest extends TestCase {
 	public void testLongestPalindrome(){
 		String s1 = "babad";
 		String result1 = t.longestPalindrome(s1);
+		System.out.println(result1);
 		assertTrue("aba".equals(result1) || "bab".equals(result1));
 		
 		String s2 = "cbbd";
@@ -311,6 +313,37 @@ public class SolutionTest extends TestCase {
 		assertEquals(4, tmp.val);
 		tmp = tmp.next;
 		assertEquals(5, tmp.val);
+		tmp = tmp.next;
+		
+	}
+	
+	@Test
+	public void testMergeKLists(){
+		Solution.ListNode first = t.new ListNode(1);
+		first.next = t.new ListNode(2);
+
+		Solution.ListNode second = t.new ListNode(3);
+		second.next = t.new ListNode(4);
+		
+		Solution.ListNode third = t.new ListNode(5);
+		third.next = t.new ListNode(6);
+		
+		ListNode[] list = new ListNode[]{first, second, third};
+		
+		ListNode result = t.mergeKLists2(list);
+		
+		ListNode tmp = result;
+		assertEquals(1, tmp.val);
+		tmp = tmp.next;
+		assertEquals(2, tmp.val);
+		tmp = tmp.next;
+		assertEquals(3, tmp.val);
+		tmp = tmp.next;
+		assertEquals(4, tmp.val);
+		tmp = tmp.next;
+		assertEquals(5, tmp.val);
+		tmp = tmp.next;
+		assertEquals(6, tmp.val);
 		tmp = tmp.next;
 		
 	}
