@@ -782,6 +782,7 @@ public class Solution {
 	]
 	Output: 1->1->2->3->4->4->5->6
 	 */
+	//方法一：利用之前的mergeTwoLists
 	public ListNode mergeKLists(ListNode[] lists) {
         if(lists.length == 0) return null;
         if(lists.length == 1) return lists[0];
@@ -794,6 +795,7 @@ public class Solution {
         return first;
     }
 	
+	//方法二：直接取出全部数据排序后生成新的node
 	public ListNode mergeKLists2(ListNode[] lists) {
         List<Integer> nums = new ArrayList<>();
         for(int i = 0; i < lists.length; i++){
@@ -809,4 +811,6 @@ public class Solution {
         nums.stream().sorted().map(num -> new ListNode(num)).reduce(first, (a, b) -> {a.next = b; return b;});
         return first.next;
     }
+	//网上看到的其他方法：
+	//利用优先级队列对所有Listnode排序，
 }
