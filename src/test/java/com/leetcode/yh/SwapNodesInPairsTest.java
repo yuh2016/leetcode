@@ -10,14 +10,14 @@ public class SwapNodesInPairsTest extends TestCase {
 	
 	@Test
 	public void testSwapPairs(){
-		SwapNodesInPairs.ListNode first = t.new ListNode(1);
-		first.next = t.new ListNode(2);
-		first.next.next = t.new ListNode(3);
-		first.next.next.next = t.new ListNode(4);
-		first.next.next.next.next = t.new ListNode(5);
-		first.next.next.next.next.next = t.new ListNode(6);
+		ListNode first = new ListNode(1);
+		first.next = new ListNode(2);
+		first.next.next = new ListNode(3);
+		first.next.next.next = new ListNode(4);
+		first.next.next.next.next = new ListNode(5);
+		first.next.next.next.next.next = new ListNode(6);
 		
-		SwapNodesInPairs.ListNode tmp = t.swapPairs(first);
+		ListNode tmp = t.swapPairs(first);
 		assertEquals(2, tmp.val);
 		tmp = tmp.next;
 		assertEquals(1, tmp.val);
