@@ -26,14 +26,14 @@ You may not alter the values in the list's nodes, only nodes itself may be chang
 		//原节点
         ListNode lastFirst = null;	//上个轮回中1号节点
         ListNode currentFirst = null;	//当前轮回中1号节点
+        ListNode left = head;	//剩余节点，每次在轮回中1号赋值
+        head = head.next;
         
         //新节点
         ListNode first = null;	//第一个节点指针
         ListNode current = null;	//当前节点指针
         ListNode tmp = new ListNode(head.val);	//上个节点指针
         currentFirst = tmp;//当前沦为1号节点
-        ListNode left = head;	//剩余节点，每次在轮回中1号赋值
-        head = head.next;
         
         int cnt = 2;	//目前
         while(head != null){
