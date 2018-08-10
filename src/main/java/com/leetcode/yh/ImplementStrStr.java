@@ -13,6 +13,8 @@ package com.leetcode.yh;
  */
 public class ImplementStrStr {
     public int strStr(String haystack, String needle) {
+        if(needle == null || needle.trim().length() == 0) return 0;
+        if(haystack == null || haystack.trim().length() == 0) return -1;
         char[] array = haystack.toCharArray();
         int i =0;
         int index = 0;
@@ -23,7 +25,9 @@ public class ImplementStrStr {
                     index++;
                 }else{
                     tmp = -1;
+                    i -= index;
                     index = 0;
+
                 }
             }else{
                 if(array[i] == needle.charAt(index)) {
@@ -33,7 +37,7 @@ public class ImplementStrStr {
             }
             i++;
         }
-
+        if(index != needle.length()) return -1;
         return tmp;
     }
 }
