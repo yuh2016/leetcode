@@ -27,7 +27,6 @@ public class ImplementStrStr {
                     tmp = -1;
                     i -= index;
                     index = 0;
-
                 }
             }else{
                 if(array[i] == needle.charAt(index)) {
