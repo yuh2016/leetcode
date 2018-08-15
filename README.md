@@ -1,4 +1,1 @@
-# leetcode
-leetcode practice
-
-leetcode练习和codewars练习
+#leetcode练习和codewars练习
