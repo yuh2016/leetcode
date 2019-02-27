@@ -6,7 +6,7 @@ public class ConwayLife {
 	 1，周围生命为3，此格存活
 	 2，周围生命为2，此格保持状态
 	 3，周围指此格四周的8格
-	 4，宇宙无限，未显示再数组中的都是dead
+	 4，宇宙无限，未显示在数组中的都是dead
 	 */
 	public static int[][] getGeneration(int[][] cells, int generations) {
 		if(generations == 0) return cells;
