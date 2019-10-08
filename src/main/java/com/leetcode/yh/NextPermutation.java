@@ -2,9 +2,6 @@ package com.leetcode.yh;
 
 import java.util.Arrays;
 
-/**
- * Created by yuhuan on 2018/8/20.
- */
 public class NextPermutation {
     public void nextPermutation(int[] nums) {
         if(nums.length == 1) return;

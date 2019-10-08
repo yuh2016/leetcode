@@ -1,9 +1,16 @@
 package com.codewars.yh;
 
+import java.util.Random;
+
 public class Psychic {
     public static double guess() {
         //Do, or do not. There is no try.
         Math.random();
+//        return 0L;
+
+        Random r1 = new Random(1);
+        Random r2 = new Random(1);
+        r1.nextDouble();
 
         return 0L;
     }
