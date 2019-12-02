@@ -1,12 +1,14 @@
 package com.algorithm4;
 
+import com.algorithm4.utils.StdOut;
+
 public class SortCompare {
     public static double time(String alg, Double[] a) {
         Stopwatch timer = new Stopwatch();
         if (alg. equals("Insertion")) Insertion.sort(a);
         if (alg. equals("Selection")) Selection.sort(a);
         if (alg. equals("Shell")) Shell.sort(a);
-//        if (alg. equals(" Merge")) Merge.sort(a);
+        if (alg. equals(" Merge")) Merge.sort(a);
 //        if (alg. equals(" Quick")) Quick.sort(a);
 //        if (alg. equals(" Heap")) Heap.sort( a);
         return timer. elapsedTime();
@@ -27,15 +29,17 @@ public class SortCompare {
     }
 
     public static void main(String[] args) {
-        args = new String[]{"Selection", "Insertion", "2", "10"};
+        args = new String[]{"Merge", "Shell", "1", "100"};
         String alg1 = args[0];
         String alg2 = args[1];
         int N = Integer.parseInt(args[2]);
         int T = Integer.parseInt(args[3]);
-        double t1 = timeRandomInput(alg1, N, T); // 算法 1 的 总 时间
-        double t2 = timeRandomInput(alg2, N, T); // 算法 2 的 总 时间
+        // 算法 1 的 总 时间
+        double t1 = timeRandomInput(alg1, N, T);
+        // 算法 2 的 总 时间
+        double t2 = timeRandomInput(alg2, N, T);
         StdOut.printf("For %d random Doubles n %s is ", N, alg1);
-        StdOut.printf("%.11f times faster than %s", t2 / t1, alg2);
+        StdOut.printf("%.1f times faster than %s", t2 / t1, alg2);
 
     }
 }

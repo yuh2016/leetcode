@@ -1,4 +1,4 @@
-package com.algorithm4;
+package com.algorithm4.utils;
 
 /******************************************************************************
  *  Compilation:  javac StdOut.java

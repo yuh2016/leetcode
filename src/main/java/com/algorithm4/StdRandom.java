@@ -47,6 +47,8 @@ package com.algorithm4;
  *
  ******************************************************************************/
 
+import com.algorithm4.utils.StdOut;
+
 import java.util.Random;
 
 /**

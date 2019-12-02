@@ -13,6 +13,8 @@ package com.algorithm4;
  *
  ******************************************************************************/
 
+import com.algorithm4.utils.StdOut;
+
 /**
  *  The {@code Stopwatch} data type is for measuring
  *  the time that elapses between the start and end of a
