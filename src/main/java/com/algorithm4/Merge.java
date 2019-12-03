@@ -7,6 +7,13 @@ public class Merge {
         sort(c, 0, c.length - 1);
     }
 
+
+    /**
+     * 自顶向下的归并方法
+     * @param c
+     * @param lo
+     * @param hi
+     */
     private static void sort(Comparable[] c, int lo, int hi) {
         if (hi <= lo) {
             return;
@@ -16,6 +23,8 @@ public class Merge {
         sort(c, mid + 1, hi);
         merge(c, lo, mid, hi);
     }
+
+
 
     /**
      * 原地归并的抽象方法
